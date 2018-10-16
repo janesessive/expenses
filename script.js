@@ -52,6 +52,35 @@ function deleteAll() {
     totalExpenses.splice(0, totalExpenses.length);
 }
 
+var button = document.getElementById("add");
+var input = document.getElementById("userinput");
+var inputCateg = document.getElementById("expCategory");
+var ul = document.querySelector("ul");
+
+
+function createListElement() {
+	var li = document.createElement("li");
+	li.appendChild(document.createTextNode(input.value + " " + inputCateg.value));
+	ul.appendChild(li);
+	input.value = "";
+	
+}
+
+function addListAfterClick() {
+	if (input.value.length > 0) {
+		createListElement();
+	}
+}
+
+function addListAfterKeypress(event) {
+	if (input.value.length > 0 && event.keyCode === 13) {
+		createListElement();
+	}
+}
+
+
+
+
 function editExpenses(){};
 
 
@@ -73,3 +102,6 @@ function main(){
 
 };
 main();
+button.addEventListener("click", addListAfterClick);
+
+input.addEventListener("keypress", addListAfterKeypress);
