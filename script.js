@@ -6,23 +6,25 @@ var ul = document.querySelector("ul");
 
 
 
-function createListElement() {
-	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(input.value + " " + inputCateg.value));
-	ul.appendChild(li);
-	input.value = "";
+// function createListElement() {
+// 	var li = document.createElement("li");
+// 	li.appendChild(document.createTextNode(input.value + " " + inputCateg.value));
+// 	ul.appendChild(li);
+// 	input.value = "";
 	
-}
+// }
 
 function addListAfterClick() {
 	if (input.value.length > 0) {
-		createListElement();
+    expenseStore.add(inputCateg.value, input.value);	
+    //asdfasdfasdf
 	}
 }
 
 function addListAfterKeypress(event) {
 	if (input.value.length > 0 && event.keyCode === 13) {
-		createListElement();
+        expenseStore.add(inputCateg.value, input.value);
+        //asdfasdf
 	}
 }
 
@@ -61,3 +63,4 @@ main();
 button.addEventListener("click", addListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);
+
