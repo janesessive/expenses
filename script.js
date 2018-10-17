@@ -1,61 +1,9 @@
-var totalExpenses = [];
-var currentId = 0;
-
-
-
-function getNextId() {
-    return currentId++;
-}
-
-
-function addExpenses(category, amount){
-
-   let record = {};
-   record.id = getNextId();
-   record.category = category;
-   record.amount = amount;
-   record.date = new Date();
-  
-
-   totalExpenses.push(record);
-   console.log(record);
-
-
-
-}
-
-
-function list(){
-    return totalExpenses;
-}
-function showExpenses(){ 
-    console.log("expenses count :", totalExpenses.length);
-    for (var i = 0; i < totalExpenses.length; i++) {
-        let record = totalExpenses[i];
-        console.log(record.category  + ": " + record.amount + " - "+ record.date);
-    }
-    
-}
-
-function deleteExpenses(id){
-    for (var i = 0; i < totalExpenses.length; i++) {
-        let record = totalExpenses[i];
-        if (record.id === id) {
-            totalExpenses.splice(i,1);
-            break;
-        }
-    }
-    
-};
-
-function deleteAll() {
-    totalExpenses.splice(0, totalExpenses.length);
-}
 
 var button = document.getElementById("add");
 var input = document.getElementById("userinput");
 var inputCateg = document.getElementById("expCategory");
 var ul = document.querySelector("ul");
+
 
 
 function createListElement() {
@@ -84,21 +32,29 @@ function addListAfterKeypress(event) {
 function editExpenses(){};
 
 
+function showExpenses(records) {
+    console.log("expenses count :", records.length);
+    for (var i = 0; i < records.length; i++) {
+        let record = records[i];
+        console.log(record.category + ": " + record.amount + " - " + record.date);
+    }
 
+}
 
 function main(){
-    addExpenses("food", 125.00);
-    addExpenses("transport", 100.00);
-    addExpenses("cinema", 25.00);
+    expenseStore.add("transport", 100.00);
+    expenseStore.add("cinema", 25.00);
+    expenseStore.add("food", 125.00);
 
-    console.log("before delete");
-    showExpenses();
-    deleteExpenses(0);
+    console.log("before delete");    
+    showExpenses(expenseStore.get());
+
+    expenseStore.delete(0);
     console.log("after delete");
-    showExpenses();
+    showExpenses(expenseStore.get());
     console.log("after delete all")
-    deleteAll();
-    showExpenses();
+    expenseStore.deleteAll();
+    showExpenses(expenseStore.get());
 
 };
 main();
